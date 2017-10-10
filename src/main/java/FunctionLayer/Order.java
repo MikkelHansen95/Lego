@@ -19,11 +19,11 @@ public class Order {
     private final int højde;
     private final Date date;
     private boolean shipped;
-    private final User user;
+    private final int userID;
 
-    public Order(User user, int id, int længde, int bredde, int højde, boolean shipped, String date) {
+    public Order(int userID, int id, int længde, int bredde, int højde, boolean shipped, String date) {
         this.id = id;
-        this.user = user;
+        this.userID = userID;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
@@ -31,8 +31,8 @@ public class Order {
         this.date = new Date();
     }
 
-    public User getUser() {
-        return user;
+    public int getUser() {
+        return userID;
     }
 
     public boolean isShipped() {
