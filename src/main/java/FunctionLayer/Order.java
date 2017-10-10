@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Order {
 
-    private final int id;
+    private int id;
     private final int længde;
     private final int bredde;
     private final int højde;
@@ -21,14 +21,18 @@ public class Order {
     private boolean shipped;
     private final int userID;
 
-    public Order(int userID, int id, int længde, int bredde, int højde, boolean shipped, String date) {
+    public Order(int userID, int id, int længde, int bredde, int højde, Date date, boolean shipped) {
         this.id = id;
-        this.userID = userID;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
         this.shipped = false;
         this.date = new Date();
+        this.userID = userID;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUser() {
@@ -62,4 +66,5 @@ public class Order {
     public int getHøjde() {
         return højde;
     }
+    
 }

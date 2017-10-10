@@ -34,7 +34,7 @@ public class User {
         return role;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
@@ -48,6 +48,6 @@ public class User {
 
     public void addToOrderList(Order order) {
         this.orderList.add(order);
-    }
+    }    
 
 }

@@ -14,5 +14,26 @@
     <body>
         <h1>Hello <%=request.getParameter( "email" )%> </h1>
         You are now logged in as a customer of our wonderful site.
+        <br>
+        <br>
+        <h3>Vælg størrelse på dit legohus.</h3>
+        <br>
+        <div>
+            <form action="*">
+                
+                Længde
+                <input id ="length" type="text" name="length" value="1" />
+                
+                Højde
+                <input id ="Heigth" type="text" name="heigth" value="1" />
+                
+                Bredde
+                <input id ="Width" type="text" name="width" value="1" />
+                
+            </form>
+        </div>
+        
+        
+        
     </body>
 </html>
