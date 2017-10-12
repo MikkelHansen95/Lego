@@ -19,7 +19,7 @@
         <h3>Vælg størrelse på dit legohus.</h3>
         <br>
         <div>
-            <form action="*">
+            <form action="createOrderServlet" method="POST">
                 
                 Længde
                 <input id ="length" type="text" name="length" value="1" />
@@ -30,6 +30,7 @@
                 Bredde
                 <input id ="Width" type="text" name="width" value="1" />
                 
+                <input type="submit" value="Submit">
             </form>
         </div>
         

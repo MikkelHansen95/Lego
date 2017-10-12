@@ -20,14 +20,25 @@ public class Order {
     private final Date date;
     private boolean shipped;
     private final int userID;
-
+    
+    public Order (int userID, int længde, int bredde, int højde){
+        this.userID = userID;
+        this.længde = længde;
+        this.bredde = bredde;
+        this.højde = højde;
+        this.shipped = false;
+        this.date = new Date();
+    }
+    
+    
+    
     public Order(int userID, int id, int længde, int bredde, int højde, Date date, boolean shipped) {
         this.id = id;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
         this.shipped = false;
-        this.date = new Date();
+        this.date = date;
         this.userID = userID;
     }
 
