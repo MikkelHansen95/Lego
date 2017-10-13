@@ -1,4 +1,3 @@
- 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,11 +5,12 @@
  */
 package DBAccess;
 
+import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,21 +21,20 @@ import java.util.List;
 /**
  * @author Mikkel Lindstrøm
  */
-
-
 public class OrderMapper {
 
-    public static void createOrder(Order order) throws LoginSampleException {
+    public static void createOrderInDB(Order order) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO order (id, userID, length, height, width, date, shipped) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, order.getId());
-            ps.setInt(2, order.getUser().getID());
+            ps.setInt(2, order.getUser());
             ps.setInt(3, order.getLængde());
             ps.setInt(4, order.getHøjde());
             ps.setInt(5, order.getBredde());
-            ps.setDate(6, (Date) order.getDate());
+            String dateStr = fromJavaToSQLDate(order.getDate());
+            ps.setString(6, dateStr);
             ps.setBoolean(7, order.isShipped());
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
@@ -66,7 +65,8 @@ public class OrderMapper {
                 Date date = rs.getDate("date");
                 boolean shipped = rs.getBoolean("shipped");
 
-                order = new Order(user, orderId, length, width, height, date, shipped);
+                order = LogicFacade.createOrder(user.getID(), orderId, length, width, height, date, shipped);
+                createOrderInDB(order);
                 user.addToOrderList(order);
 
                 return user;
@@ -77,18 +77,11 @@ public class OrderMapper {
         return user;
     }
 
-    public static void setShipped(User user) throws LoginSampleException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "UPDATE order"
-                    + "SET shipped=1"
-                    + "WHERE userID=" + user.getID();
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new LoginSampleException(ex.getMessage());
-        }
+     private static String fromJavaToSQLDate(Date date) {
+        java.text.SimpleDateFormat sdf
+                = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(date);
+        return currentTime;
     }
 
 }

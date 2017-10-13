@@ -12,21 +12,19 @@
         <title>Customer home page</title>
     </head>
     <body>
-        <h1>Hello <%=request.getParameter( "email" )%> </h1>
+        <h1>Hello <%=request.getParameter("email")%> </h1>
         You are now logged in as a customer of our wonderful site.
         <br>
         <br>
         <h3>Vælg størrelse på dit legohus.</h3>
         <br>
         <div>
-            <form action="createOrderServlet" method="POST">
-                
+            <form action="FrontController" method="POST">
+                <input type="hidden" name="command" value="doOrder">
                 Længde
                 <input id ="length" type="text" name="length" value="1" />
-                
                 Højde
                 <input id ="Heigth" type="text" name="heigth" value="1" />
-                
                 Bredde
                 <input id ="Width" type="text" name="width" value="1" />
                 
@@ -34,7 +32,13 @@
             </form>
         </div>
         
-        
-        
+        <div>
+            <form method="get" action="/customerpageAll.jsp">
+                <button type="submit">All Orders</button>
+            </form>
+        </div>
+
+
+
     </body>
 </html>

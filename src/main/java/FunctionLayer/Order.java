@@ -17,7 +17,7 @@ public class Order {
     private final int længde;
     private final int bredde;
     private final int højde;
-    private final Date date;
+    private Date date;
     private boolean shipped;
     private final int userID;
     
@@ -32,7 +32,7 @@ public class Order {
     
     
     
-    public Order(int userID, int id, int længde, int bredde, int højde, Date date, boolean shipped) {
+    public Order(int id, int userID,int længde, int bredde, int højde, Date date, boolean shipped) {
         this.id = id;
         this.længde = længde;
         this.bredde = bredde;
