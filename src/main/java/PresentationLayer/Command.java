@@ -21,7 +21,7 @@ abstract class Command {
         commands.put("register", new Register());
         commands.put("doOrder", new doOrder());
         commands.put("viewUserOrderList", new viewUserOrderList());
-        commands.put("viewCustomerpage", new viewCustomerpage());
+        commands.put("viewRolepage", new viewRolepage());
         commands.put("logout", new logout());
 
     }

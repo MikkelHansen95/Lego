@@ -15,14 +15,18 @@ import javax.servlet.http.HttpSession;
  *
  * @author Mikkel Lindstrøm <Mikkel.Lindstrøm>
  */
-public class viewCustomerpage extends Command {
+public class viewRolepage extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         User user = (User) (session.getAttribute("user"));
         session.setAttribute("user", user);
-        return "customerpage";
+        if ("customer".equals(user.getRole())){
+            return "customerpage";
+        }else
+
+            return "employeepage";
     }
 
 }

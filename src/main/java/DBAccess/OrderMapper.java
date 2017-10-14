@@ -64,12 +64,13 @@ public class OrderMapper {
                 order = LogicFacade.createOrderFromDB(orderId, userId, length, width, height, date, shipped);
                 user.addToOrderList(order);
 
-                return user;
+                
             }
+            return user;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-        return user;
+        
     }
     
     public static ArrayList<Order> getOrderListAll() throws LoginSampleException {
@@ -77,7 +78,7 @@ public class OrderMapper {
         try {
             Order order = null;
             Connection con = Connector.connection();
-            String SQL = "SELECT * FROM orders ";
+            String SQL = "SELECT * FROM orders";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
 
@@ -92,12 +93,14 @@ public class OrderMapper {
 
                 order = LogicFacade.createOrderFromDB(userId, orderId, length, width, height, date, shipped);
                 orderListAll.add(order);
+                order = null;
                 
             }
              
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
+       
         return orderListAll;
     }
     

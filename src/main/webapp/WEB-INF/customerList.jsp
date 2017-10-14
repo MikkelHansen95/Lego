@@ -69,7 +69,7 @@
 
         <div class="orderList">
             <form action="FrontController" method="get">
-                <input type="hidden" name="command" value="viewCustomerpage">
+                <input type="hidden" name="command" value="viewRolepage">
                 <input type="submit" name="submit" value="Back to customerpage">
             </form>
         </div>
