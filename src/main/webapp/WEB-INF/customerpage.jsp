@@ -22,7 +22,7 @@
             <form action="FrontController" method="POST">
                 <input type="hidden" name="command" value="doOrder">
                 Længde
-                <input id ="length" type="text" name="length" value="1" />
+                <input id ="Length" type="text" name="length" value="1" />
                 Højde
                 <input id ="Heigth" type="text" name="heigth" value="1" />
                 Bredde
@@ -32,11 +32,14 @@
             </form>
         </div>
         
-        <div>
-            <form method="get" action="/customerpageAll.jsp">
-                <button type="submit">All Orders</button>
-            </form>
-        </div>
+  
+        
+        <div class="orderList">
+                <form action="FrontController" method="get">
+                    <input type="hidden" name="command" value="viewUserOrderList">
+                    <input type="submit" name="submit" value="See all Orders">
+                </form>
+            </div>
 
 
 

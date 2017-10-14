@@ -16,11 +16,13 @@ public class User {
         this.orderList = orderList;
     }
 
+    
+
     private int id; // just used to demo retrieval of autogen keys in UserMapper
     private final String email;
     private final String password; // Should be hashed and all
     private final String role;
-    private ArrayList<Order> orderList;
+    private ArrayList<Order> orderList = new ArrayList();
 
     public String getEmail() {
         return email;
@@ -50,4 +52,8 @@ public class User {
         this.orderList.add(order);
     }    
 
+    public void setOrderList(ArrayList<Order> orderList) {
+        this.orderList = orderList;
+    }
+    
 }

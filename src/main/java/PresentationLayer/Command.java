@@ -20,6 +20,8 @@ abstract class Command {
         commands.put( "login", new Login() );
         commands.put( "register", new Register() );
         commands.put( "doOrder", new doOrder() );
+        commands.put( "viewUserOrderList", new viewUserOrderList() );
+        
         
     }
 

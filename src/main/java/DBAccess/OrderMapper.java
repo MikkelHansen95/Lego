@@ -26,16 +26,15 @@ public class OrderMapper {
     public static void createOrderInDB(Order order) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO order (id, userID, length, height, width, date, shipped) VALUES (?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO orders (userID, length, height, width, date, shipped) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, order.getId());
-            ps.setInt(2, order.getUser());
-            ps.setInt(3, order.getLængde());
-            ps.setInt(4, order.getHøjde());
-            ps.setInt(5, order.getBredde());
+            ps.setInt(1, order.getUser());
+            ps.setInt(2, order.getLængde());
+            ps.setInt(3, order.getHøjde());
+            ps.setInt(4, order.getBredde());
             String dateStr = fromJavaToSQLDate(order.getDate());
-            ps.setString(6, dateStr);
-            ps.setBoolean(7, order.isShipped());
+            ps.setString(5, dateStr);
+            ps.setBoolean(6, order.isShipped());
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -45,12 +44,11 @@ public class OrderMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
-
     public static User getOrderList(User user) throws LoginSampleException {
         try {
             Order order = null;
             Connection con = Connector.connection();
-            String SQL = "SELECT id, userID, length, height, width, date, shipped FROM order "
+            String SQL = "SELECT id, userID, length, height, width, date, shipped FROM orders "
                     + "WHERE userID=" + user.getID();
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
@@ -76,6 +74,37 @@ public class OrderMapper {
         }
         return user;
     }
+    
+    public static ArrayList<Order> getOrderListAll() throws LoginSampleException {
+            ArrayList<Order> orderListAll = new ArrayList<>();
+        try {
+            Order order = null;
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM orders ";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int orderId = rs.getInt("id");
+                int userId = rs.getInt("userID");
+                int length = rs.getInt("length");
+                int height = rs.getInt("height");
+                int width = rs.getInt("width");
+                Date date = rs.getDate("date");
+                boolean shipped = rs.getBoolean("shipped");
+
+                order = LogicFacade.createOrder(userId, orderId, length, width, height, date, shipped);
+                orderListAll.add(order);
+                return orderListAll;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return orderListAll;
+    }
+    
+    
+    
 
      private static String fromJavaToSQLDate(Date date) {
         java.text.SimpleDateFormat sdf

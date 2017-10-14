@@ -37,33 +37,50 @@ public class createOrderS extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession session = request.getSession();
-        User user = (User) (session.getAttribute("user"));
-        
-        int length = Integer.parseInt(request.getParameter("length"));
-        int width = Integer.parseInt(request.getParameter("width"));
-        int height = Integer.parseInt(request.getParameter("heigth"));
-
-        Order order = new Order(user.getID(),length,width,height);
         try {
-            OrderMapper.createOrderInDB(order);
-            
             Command action = Command.from( request );
             String view = action.execute( request, response );
-            request.getRequestDispatcher( "/WEB-INF/customerList.jsp" ).forward( request, response );
-            
-            
-            
-        } catch (LoginSampleException ex) {
-            Logger.getLogger(createOrderS.class.getName()).log(Level.SEVERE, null, ex);
-            
+            request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
+        } catch ( LoginSampleException ex ) {
+            request.setAttribute( "error", ex.getMessage() );
+            request.getRequestDispatcher( "WEB-INF/customerpage.jsp" ).forward( request, response );
         }
-        
     }
+    
+    
+    
+    
+    
+    
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//
+//        HttpSession session = request.getSession();
+//        User user = (User) (session.getAttribute("user"));
+//        
+//        int length = Integer.parseInt(request.getParameter("length"));
+//        int width = Integer.parseInt(request.getParameter("width"));
+//        int height = Integer.parseInt(request.getParameter("heigth"));
+//
+//        Order order = new Order(user.getID(),length,width,height);
+//        try {
+//            OrderMapper.createOrderInDB(order);
+//            
+//            Command action = Command.from( request );
+//            String view = action.execute( request, response );
+//            request.getRequestDispatcher( "/WEB-INF/customerList.jsp" ).forward( request, response );
+//            
+//            
+//            
+//        } catch (LoginSampleException ex) {
+//            Logger.getLogger(createOrderS.class.getName()).log(Level.SEVERE, null, ex);
+//            
+//        }
+//        
+//    }
 
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

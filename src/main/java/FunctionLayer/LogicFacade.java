@@ -30,5 +30,9 @@ public class LogicFacade {
         OrderMapper.createOrderInDB(order);
         return order;
     }
+      public static User getOrderList(User user) throws LoginSampleException {
+        user = OrderMapper.getOrderList(user);
+        return user;
+    }
 
 }

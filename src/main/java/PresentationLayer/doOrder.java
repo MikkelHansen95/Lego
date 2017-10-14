@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
  * @author Mikkel Lindstrøm 
  */
 public class doOrder extends Command {
@@ -22,7 +21,7 @@ public class doOrder extends Command {
     @Override
     String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException {
         HttpSession session = request.getSession();
-        User user = (User) (session.getAttribute("user"));
+        User user =(User) (session.getAttribute("user"));
         
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
