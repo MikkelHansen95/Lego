@@ -48,23 +48,20 @@ public class OrderMapper {
         try {
             Order order = null;
             Connection con = Connector.connection();
-            String SQL = "SELECT id, userID, length, height, width, date, shipped FROM orders "
-                    + "WHERE userID=" + user.getID();
+            String SQL = "SELECT * FROM orders WHERE userID=" + user.getID();
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int orderId = rs.getInt("id");
                 int userId = rs.getInt("userID");
-                user = UserMapper.getUser(userId);
                 int length = rs.getInt("length");
                 int height = rs.getInt("height");
                 int width = rs.getInt("width");
                 Date date = rs.getDate("date");
                 boolean shipped = rs.getBoolean("shipped");
 
-                order = LogicFacade.createOrder(user.getID(), orderId, length, width, height, date, shipped);
-                createOrderInDB(order);
+                order = LogicFacade.createOrderFromDB(orderId, userId, length, width, height, date, shipped);
                 user.addToOrderList(order);
 
                 return user;
@@ -93,10 +90,11 @@ public class OrderMapper {
                 Date date = rs.getDate("date");
                 boolean shipped = rs.getBoolean("shipped");
 
-                order = LogicFacade.createOrder(userId, orderId, length, width, height, date, shipped);
+                order = LogicFacade.createOrderFromDB(userId, orderId, length, width, height, date, shipped);
                 orderListAll.add(order);
-                return orderListAll;
+                
             }
+             
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }

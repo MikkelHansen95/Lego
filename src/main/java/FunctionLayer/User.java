@@ -9,20 +9,18 @@ import java.util.ArrayList;
  */
 public class User {
 
+    private int id; // just used to demo retrieval of autogen keys in UserMapper
+    private final String email;
+    private final String password; // Should be hashed and all
+    private final String role;
+    private ArrayList<Order> orderList = new ArrayList();
+
     public User(String email, String password, String role) {
         this.email = email;
         this.password = password;
         this.role = role;
         this.orderList = orderList;
     }
-
-    
-
-    private int id; // just used to demo retrieval of autogen keys in UserMapper
-    private final String email;
-    private final String password; // Should be hashed and all
-    private final String role;
-    private ArrayList<Order> orderList = new ArrayList();
 
     public String getEmail() {
         return email;
@@ -50,10 +48,10 @@ public class User {
 
     public void addToOrderList(Order order) {
         this.orderList.add(order);
-    }    
+    }
 
     public void setOrderList(ArrayList<Order> orderList) {
         this.orderList = orderList;
     }
-    
+
 }

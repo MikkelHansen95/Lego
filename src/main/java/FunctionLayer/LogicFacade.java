@@ -20,12 +20,11 @@ public class LogicFacade {
         UserMapper.createUser( user );
         return user;
     }
-    public static Order createOrder(int userID, int id, int længde, int bredde, int højde, Date date, boolean shipped) throws LoginSampleException {
-        Order order = new Order(userID,id,længde,bredde,højde,date,shipped);
-        OrderMapper.createOrderInDB(order);
+    public static Order createOrderFromDB(int id, int userID, int længde, int bredde, int højde, Date date, boolean shipped) throws LoginSampleException {
+        Order order = new Order(id,userID,længde,bredde,højde,date,shipped);
         return order;
     }
-     public static Order createOrder(int userID, int længde, int bredde, int højde) throws LoginSampleException {
+     public static Order createOrderInDB(int userID, int længde, int bredde, int højde) throws LoginSampleException {
         Order order = new Order(userID, længde, bredde, højde);
         OrderMapper.createOrderInDB(order);
         return order;
