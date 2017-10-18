@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,8 @@ import java.util.List;
  * @author Mikkel Lindstrøm
  */
 public class OrderMapper {
+    
+    private static SimpleDateFormat dt = new SimpleDateFormat("d. MMM yyyy - HH:mm");
 
     public static void createOrderInDB(Order order) throws LoginSampleException {
         try {
@@ -61,10 +64,9 @@ public class OrderMapper {
                 int length = rs.getInt("length");
                 int height = rs.getInt("height");
                 int width = rs.getInt("width");
-                Date date = rs.getDate("date");
+                Date date = rs.getTimestamp("date");
                 int shipped = rs.getInt("shipped");
-                Date shipDate = rs.getDate("shippingDate");
-
+                Date shipDate = rs.getTimestamp("shippingDate");
                 order = LogicFacade.createOrderFromDB(orderId, userId, length, width, height, date, shipped,shipDate);
                 user.addToOrderList(order);
 
@@ -91,9 +93,9 @@ public class OrderMapper {
                 int length = rs.getInt("length");
                 int height = rs.getInt("height");
                 int width = rs.getInt("width");
-                Date date = rs.getDate("date");
+                Date date = rs.getTimestamp("date");
                 int shipped = rs.getInt("shipped");
-                Date shippingDate = rs.getDate("shippingDate");
+                Date shippingDate = rs.getTimestamp("shippingDate");
 
                 order = LogicFacade.createOrderFromDB(userId, orderId, length, width, height, date, shipped, shippingDate);
                 orderListAll.add(order);
@@ -117,8 +119,7 @@ public class OrderMapper {
     public static void updateShipStatus(int orderId) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "UPDATE orders SET shipped=1 WHERE id=" + orderId;
-
+            String SQL = "UPDATE orders SET shipped = '1' WHERE id =" + orderId;
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.executeUpdate();
 
@@ -126,5 +127,7 @@ public class OrderMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+    
+    
 
 }

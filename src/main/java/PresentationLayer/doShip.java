@@ -24,7 +24,7 @@ public class doShip extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
         int id = Integer.parseInt(request.getParameter("orderId"));
-
+        
         try {
             LogicFacade.setShipStatus(id);
         } catch (SQLException | ClassNotFoundException ex) {

@@ -41,6 +41,13 @@ public class LogicFacade {
 
     public static void setShipStatus(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
         OrderMapper.updateShipStatus(orderId);
+ 
+    }
+
+    public static Stykliste createStykliste(int fireklods, int toklods, int enkeltklods) {
+        Stykliste stykliste = new Stykliste(fireklods, toklods, enkeltklods);
+        return stykliste;
+
     }
 
 }

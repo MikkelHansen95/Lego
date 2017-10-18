@@ -24,6 +24,7 @@ abstract class Command {
         commands.put("viewRolepage", new viewRolepage());
         commands.put("logout", new logout());
         commands.put("doShip", new doShip());
+        commands.put("doStykliste", new doStykliste());
 
     }
 

@@ -55,6 +55,7 @@
                         <th>Height</th>
                         <th>Date</th>
                         <th>Shipped</th>
+                        <th>Stykliste</th>
                     </tr>
                 </thead>
                 <%= Render.viewUserOrderList(OrderList)%>

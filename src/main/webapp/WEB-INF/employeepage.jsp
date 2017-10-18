@@ -24,13 +24,6 @@
 
 
     </head>
-    <style>
-        #tableView{
-            margin: auto;
-            margin-top: 8%;  
-        }
-    </style>
-
 
     <body>
         <%
@@ -41,11 +34,11 @@
         <h1>Hello <%=user.getEmail()%> </h1>
         You are now logged in as a EMPLOYEE of our wonderful site.
 
-        <div class="col-sm-3">
+        <div class="col-sm-1">
         </div>
 
 
-        <div id="tableView" class="col-sm-6">
+        <div id="tableView" class="col-sm-10">
             <table class="table table-striped" id="ordertable">
                 <thead>
                     <tr>
@@ -56,6 +49,7 @@
                         <th>Height</th>
                         <th>Date</th>
                         <th>Shipped</th>
+                        <th>Stykliste</th>
                     </tr>
                 </thead>
                 <%= Render.viewUserOrderListEmp(OrderList)%>
@@ -64,15 +58,9 @@
         </div>
 
 
-        <div class="col-sm-3">
+        <div class="col-sm-1">
         </div>
 
-        <div class="orderList">
-            <form action="FrontController" method="get">
-                <input type="hidden" name="command" value="viewRolepage">
-                <input type="submit" name="submit" value="Back to employeepage">
-            </form>
-        </div>
 
         <div class="LogoutButton">
             <form action="FrontController" method="get">
@@ -80,13 +68,5 @@
                 <input type="submit" name="submit" value="Logout">
             </form>
         </div>
-
-
-
-        <script> 
-            function Ship() {
-                    document.getElementById(buttton).innerHTML =Shipped;
-                    }
-         </script>
     </body>
 </html>
