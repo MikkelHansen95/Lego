@@ -26,7 +26,7 @@ public class OrderMapper {
     public static void createOrderInDB(Order order) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO orders (userID, length, height, width, date, shipped) VALUES (?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO orders (userID, length, height, width, date, shipped, shippingDate) VALUES (?, ?, ?, ?, ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, order.getUser());
             ps.setInt(2, order.getLængde());
@@ -34,7 +34,9 @@ public class OrderMapper {
             ps.setInt(4, order.getBredde());
             String dateStr = fromJavaToSQLDate(order.getDate());
             ps.setString(5, dateStr);
-            ps.setBoolean(6, order.isShipped());
+            ps.setInt(6, order.isShipped());
+            String dateShipStr = fromJavaToSQLDate(order.getShippingDate());
+            ps.setString(7, dateShipStr);
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -44,6 +46,7 @@ public class OrderMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+
     public static User getOrderList(User user) throws LoginSampleException {
         try {
             Order order = null;
@@ -59,22 +62,22 @@ public class OrderMapper {
                 int height = rs.getInt("height");
                 int width = rs.getInt("width");
                 Date date = rs.getDate("date");
-                boolean shipped = rs.getBoolean("shipped");
+                int shipped = rs.getInt("shipped");
+                Date shipDate = rs.getDate("shippingDate");
 
-                order = LogicFacade.createOrderFromDB(orderId, userId, length, width, height, date, shipped);
+                order = LogicFacade.createOrderFromDB(orderId, userId, length, width, height, date, shipped,shipDate);
                 user.addToOrderList(order);
 
-                
             }
             return user;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-        
+
     }
-    
+
     public static ArrayList<Order> getOrderListAll() throws LoginSampleException {
-            ArrayList<Order> orderListAll = new ArrayList<>();
+        ArrayList<Order> orderListAll = new ArrayList<>();
         try {
             Order order = null;
             Connection con = Connector.connection();
@@ -89,29 +92,39 @@ public class OrderMapper {
                 int height = rs.getInt("height");
                 int width = rs.getInt("width");
                 Date date = rs.getDate("date");
-                boolean shipped = rs.getBoolean("shipped");
+                int shipped = rs.getInt("shipped");
+                Date shippingDate = rs.getDate("shippingDate");
 
-                order = LogicFacade.createOrderFromDB(userId, orderId, length, width, height, date, shipped);
+                order = LogicFacade.createOrderFromDB(userId, orderId, length, width, height, date, shipped, shippingDate);
                 orderListAll.add(order);
                 order = null;
-                
             }
-             
+
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-       
+
         return orderListAll;
     }
-    
-    
-    
 
-     private static String fromJavaToSQLDate(Date date) {
+    private static String fromJavaToSQLDate(Date date) {
         java.text.SimpleDateFormat sdf
                 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(date);
         return currentTime;
+    }
+
+    public static void updateShipStatus(int orderId) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE orders SET shipped=1 WHERE id=" + orderId;
+
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.executeUpdate();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
     }
 
 }

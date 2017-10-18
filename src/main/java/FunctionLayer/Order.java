@@ -18,28 +18,40 @@ public class Order {
     private final int bredde;
     private final int højde;
     private Date date;
-    private boolean shipped;
+    private int shipped;
     private final int userID;
+    private Date shippingDate;
     
     public Order (int userID, int længde, int bredde, int højde){
         this.userID = userID;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
-        this.shipped = false;
+        this.shipped = 0;
         this.date = new Date();
+        this.shippingDate = null;
     }
     
     
     
-    public Order(int id, int userID,int længde, int bredde, int højde, Date date, boolean shipped) {
+    public Order(int id, int userID,int længde, int bredde, int højde, Date date, int shipped, Date shippingDate) {
         this.id = id;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
-        this.shipped = false;
+        this.shipped = shipped;
         this.date = date;
         this.userID = userID;
+        this.shippingDate = shippingDate;
+    }
+
+    public Date setShippingDate() {
+        date = new Date();
+        return date;
+    }
+
+    public Date getShippingDate() {
+        return shippingDate;
     }
 
     public void setId(int id) {
@@ -50,11 +62,11 @@ public class Order {
         return userID;
     }
 
-    public boolean isShipped() {
+    public int isShipped() {
         return shipped;
     }
 
-    public void setShipped(boolean shipped) {
+    public void setShipped(int shipped) {
         this.shipped = shipped;
     }
 

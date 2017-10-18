@@ -23,6 +23,7 @@ abstract class Command {
         commands.put("viewUserOrderList", new viewUserOrderList());
         commands.put("viewRolepage", new viewRolepage());
         commands.put("logout", new logout());
+        commands.put("doShip", new doShip());
 
     }
 

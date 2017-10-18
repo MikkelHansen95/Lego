@@ -58,7 +58,7 @@
                         <th>Shipped</th>
                     </tr>
                 </thead>
-                <%= Render.viewUserOrderList(OrderList)%>
+                <%= Render.viewUserOrderListEmp(OrderList)%>
 
             </table>
         </div>
@@ -82,5 +82,11 @@
         </div>
 
 
+
+        <script> 
+            function Ship() {
+                    document.getElementById(buttton).innerHTML =Shipped;
+                    }
+         </script>
     </body>
 </html>

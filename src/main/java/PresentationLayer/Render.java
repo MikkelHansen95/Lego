@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.Order;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -23,14 +24,50 @@ public class Render {
                     + "<th>" + order.getLængde() + "</th>"
                     + "<th>" + order.getBredde() + "</th>"
                     + "<th>" + order.getHøjde() + "</th>"
-                    + "<th>" + order.getDate() + "</th>"
-                    + "<th>" + order.isShipped() + "</th>";
+                    + "<th>" + order.getDate() + "</th>";
+
+            if (order.isShipped() == 0) {
+                output += "<th>" + "Not Shipped yet" + "</th>";
+
+            } else {
+                output += "<th>" + order.getShippingDate() + "</th>";
+            }
             output += "</tr>";
         }
         return output;
 
     }
-    
-    
+
+    public static String viewUserOrderListEmp(ArrayList<Order> orderList) {
+
+        String output = "";
+        for (Order order : orderList) {
+            output += "<tr>"
+                    + "<th>" + order.getUser() + "</th>"
+                    + "<th>" + order.getId() + "</th>"
+                    + "<th>" + order.getLængde() + "</th>"
+                    + "<th>" + order.getBredde() + "</th>"
+                    + "<th>" + order.getHøjde() + "</th>"
+                    + "<th>" + order.getDate() + "</th>";
+
+            if (order.isShipped() == 0) {
+                output += "<th>" 
+                        + "<form action=" + "FrontController " + "method=" + "POST" + "> "
+                        + "<input type=" + "hidden" + " name=" + "command" + " value=" + "doShip" + ">"
+                        + "<input type=" + "hidden" + " name=" + "orderId" + " value=" + order.getId() + ">"
+                        + "<input type=" + "submit" + " name=" + "shipped" + " value=" + "Ship Order" + ">"
+                        + "</form>"
+                        + "</th>";
+
+            } else {
+                output += "<th>" + order.getShippingDate() + "<th>";
+            }
+
+        }
+
+        output += "</tr>";
+        return output;
+
+    }
 
 }
