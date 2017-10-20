@@ -10,10 +10,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome page</title>
+        <link href="cssindex.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Welcome to Sem 2</h1>
+        <div class ="background" id="background">
+            
+        <div id="welcome">
+        <h1>Welcome to BuildingBlocks</h1>
+        </div>
         
+        <div id="login">
         <table>
             <tr><td>Login</td>
                 <td>
@@ -44,13 +50,17 @@
                         <input type="submit" value="Submit">
                     </form>
                 </td>
+                </div>
             </tr>
         </table>
+        </div>
+            
         <% String error = (String) request.getAttribute( "error");
            if ( error != null) { %>
            <H2>Error!!</h2>
            <p><%= error %>
         <% }
         %>
-    </body>
+        </div>
+        </body>
 </html>
