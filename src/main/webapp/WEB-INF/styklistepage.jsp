@@ -4,22 +4,21 @@
     Author     : Mikkel Lindstrøm <Mikkel.Lindstrøm>
 --%>
 
-<%@page import="FunctionLayer.Stykliste"%>
+<%@page import="FunctionLayer.User"%>
+<%@page import="FunctionLayer.LegoStykliste"%>
 <%@page import="FunctionLayer.Order"%>
 <%@page import="PresentationLayer.Render"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    
-    <%  Stykliste stykliste = (Stykliste) session.getAttribute("stykliste"); %>
-    
-    <body>
-        <h1>Hello World!</h1>
-        
+
+    <%  LegoStykliste stykliste = (LegoStykliste) session.getAttribute("LegoStyklist");%>
+
+
         <div id="tableView" class="col-sm-6">
             <table class="table table-striped" id="ordertable">
                 <thead>
@@ -30,18 +29,31 @@
                     </tr>
                 </thead>
                 
-                <thead>
                     <tr>
                         <th> <%=stykliste.getFireklods()%> </th>
                         <th> <%=stykliste.getToklods()%> </th>
                         <th> <%=stykliste.getEnkeltklods()%> </th>
                     </tr>
-                </thead>
-                
+            
 
             </table>
         </div>
-        
-        
-    </body>
-</html>
+
+                   
+        <div class="viewOrderList">
+            <form action="FrontController" method="get">
+                <input type="hidden" name="command" value="viewRolepage">
+                <input type="submit" name="submit" value="Back to orderlist">
+            </form>
+        </div>
+
+        <div class="LogoutButton">
+            <form action="FrontController" method="get">
+                <input type="hidden" name="command" value="logout">
+                <input type="submit" name="submit" value="Logout">
+            </form>
+        </div>
+
+
+    
+

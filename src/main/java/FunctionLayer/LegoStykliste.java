@@ -9,13 +9,13 @@ package FunctionLayer;
  *
  * @author Mikkel Lindstrøm
  */
-public class Stykliste {
+public class LegoStykliste {
     
     private int fireklods;
     private int toklods;
     private int enkeltklods;
 
-    public Stykliste(int fireklods, int toklods, int enkeltklods) {
+    public LegoStykliste(int fireklods, int toklods, int enkeltklods) {
         this.fireklods = fireklods;
         this.toklods = toklods;
         this.enkeltklods = enkeltklods;

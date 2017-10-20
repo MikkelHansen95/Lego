@@ -25,13 +25,17 @@
         <div>
             <form action="FrontController" method="POST">
                 <input type="hidden" name="command" value="doOrder">
+                <p>Huset skal minimum være 6 langt og 6 bredt for at kunne bygge et hus, 
+                    alle huse som er længere end 9 og højere end 3 får indbygget dør og vindue med</p>
+                <br>
+                
                 Længde
-                <input id ="Length" type="text" name="length" value="1" />
+                <input id ="Length" type="text" name="length" value="6" />
+                Bredde
+                <input id ="Width" type="text" name="width" value="6" />
                 Højde
                 <input id ="Heigth" type="text" name="heigth" value="1" />
-                Bredde
-                <input id ="Width" type="text" name="width" value="1" />
-
+                
                 <input type="submit" value="Submit">
             </form>
         </div>

@@ -8,11 +8,10 @@ package PresentationLayer;
 import DBAccess.OrderMapper;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import FunctionLayer.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,14 +22,14 @@ public class doShip extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
-        int id = Integer.parseInt(request.getParameter("orderId"));
-        
-        try {
-            LogicFacade.setShipStatus(id);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(doShip.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        HttpSession session = request.getSession();
+        int oid = Integer.parseInt(request.getParameter("oid"));
+        LogicFacade.setShipStatus(oid);
+//        session.setAttribute("orderId", oid);
+        Order order = OrderMapper.getSingleOrderFromId(oid);
+        order.setShippingDate();
+        OrderMapper.getOrderListAll();
         return "employeepage";
+
     }
 }

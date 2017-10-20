@@ -34,11 +34,12 @@
         <h1>Hello <%=user.getEmail()%> </h1>
         You are now logged in as a EMPLOYEE of our wonderful site.
 
-        <div class="col-sm-1">
+
+        <div class="col-sm-2">
+
         </div>
 
-
-        <div id="tableView" class="col-sm-10">
+        <div id="tableView" class="col-sm-8">
             <table class="table table-striped" id="ordertable">
                 <thead>
                     <tr>
@@ -56,11 +57,9 @@
 
             </table>
         </div>
+        <div class="col-sm-2">
 
-
-        <div class="col-sm-1">
         </div>
-
 
         <div class="LogoutButton">
             <form action="FrontController" method="get">

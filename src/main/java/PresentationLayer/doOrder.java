@@ -26,6 +26,10 @@ public class doOrder extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         int height = Integer.parseInt(request.getParameter("heigth"));    
+        if(length<6 || width<6){
+            return user.getRole() + "page";
+        }
+        
         Order order = LogicFacade.createOrderInDB(user.getID(), length, width, height);
         user.addToOrderList(order);
         session.setAttribute( "user", user );

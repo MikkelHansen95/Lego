@@ -5,11 +5,8 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.Order;
-import FunctionLayer.Stykliste;
-import FunctionLayer.User;
+import FunctionLayer.LegoStykliste;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,12 +21,11 @@ public class doStykliste extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         
-        int length = Integer.parseInt(request.getParameter("length"));
-        int width = Integer.parseInt(request.getParameter("width"));
-        int height = Integer.parseInt(request.getParameter("heigth"));  
-        Stykliste stykliste = LogicFacade.createStykliste(length, width, height);
-        session.setAttribute("stykliste", stykliste);
-        
+        int længde = Integer.parseInt(request.getParameter("length"));
+        int bredde = Integer.parseInt(request.getParameter("width"));
+        int højde = Integer.parseInt(request.getParameter("heigth")); 
+        LegoStykliste LegoStyklist = Render.stykListe(længde, bredde, højde);
+        session.setAttribute("LegoStyklist", LegoStyklist);
         
         return "styklistepage";
     }

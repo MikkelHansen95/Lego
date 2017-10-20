@@ -5,6 +5,8 @@
  */
 package FunctionLayer;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,29 +15,27 @@ import java.util.Date;
  */
 public class Order {
 
-    private int id;
+    private int oid;
     private final int længde;
     private final int bredde;
     private final int højde;
-    private Date date;
+    private String date;
     private int shipped;
     private final int userID;
-    private Date shippingDate;
-    
-    public Order (int userID, int længde, int bredde, int højde){
+    private String shippingDate;
+
+    public Order(int userID, int længde, int bredde, int højde) {
         this.userID = userID;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
         this.shipped = 0;
-        this.date = new Date();
-        this.shippingDate = null;
+        this.date = setDate();
+        this.shippingDate = shippingDate;
     }
-    
-    
-    
-    public Order(int id, int userID,int længde, int bredde, int højde, Date date, int shipped, Date shippingDate) {
-        this.id = id;
+
+    public Order(int oid, int userID, int længde, int bredde, int højde, String date, int shipped, String shippingDate) {
+        this.oid = oid;
         this.længde = længde;
         this.bredde = bredde;
         this.højde = højde;
@@ -45,17 +45,26 @@ public class Order {
         this.shippingDate = shippingDate;
     }
 
-    public Date setShippingDate() {
-        date = new Date();
+    public String setShippingDate() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date datedate = new Date();
+        String shippingDate = df.format(datedate);
+        return shippingDate;
+    }
+
+    public String setDate() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date datedate = new Date();
+        String date = df.format(datedate);
         return date;
     }
 
-    public Date getShippingDate() {
+    public String getShippingDate() {
         return shippingDate;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.oid = id;
     }
 
     public int getUser() {
@@ -70,12 +79,12 @@ public class Order {
         this.shipped = shipped;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     public int getId() {
-        return id;
+        return oid;
     }
 
     public int getLængde() {
@@ -89,5 +98,5 @@ public class Order {
     public int getHøjde() {
         return højde;
     }
-    
+
 }

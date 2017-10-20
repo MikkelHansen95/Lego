@@ -5,6 +5,8 @@ import DBAccess.UserMapper;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The purpose of LogicFacade is to...
@@ -23,7 +25,7 @@ public class LogicFacade {
         return user;
     }
 
-    public static Order createOrderFromDB(int id, int userID, int længde, int bredde, int højde, Date date, int shipped, Date shippingDate) throws LoginSampleException {
+    public static Order createOrderFromDB(int id, int userID, int længde, int bredde, int højde, String date, int shipped, String shippingDate) throws LoginSampleException {
         Order order = new Order(id, userID, længde, bredde, højde, date, shipped, shippingDate);
         return order;
     }
@@ -39,15 +41,10 @@ public class LogicFacade {
         return user;
     }
 
-    public static void setShipStatus(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
-        OrderMapper.updateShipStatus(orderId);
- 
+    public static void setShipStatus(int oid) throws LoginSampleException {
+            OrderMapper.updateShippingStatus(oid);
+            OrderMapper.updateShippingDate(oid);
     }
 
-    public static Stykliste createStykliste(int fireklods, int toklods, int enkeltklods) {
-        Stykliste stykliste = new Stykliste(fireklods, toklods, enkeltklods);
-        return stykliste;
-
-    }
 
 }
